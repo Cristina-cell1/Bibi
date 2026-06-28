@@ -21,17 +21,21 @@ export default defineNuxtConfig({
     },
   },
 
-  nitro: {
-    preset: "cloudflare-pages",
-    cloudflare: {
-      pages: {
-        routes: {
-          include: ["/*"],
-          exclude: ["/_nuxt/*", "/fonts/*"],
+  nitro: process.env.VERCEL
+    ? {
+        preset: "vercel",
+      }
+    : {
+        preset: "cloudflare-pages",
+        cloudflare: {
+          pages: {
+            routes: {
+              include: ["/*"],
+              exclude: ["/_nuxt/*", "/fonts/*"],
+            },
+          },
         },
       },
-    },
-  },
 
   runtimeConfig: {
     // приватные (только сервер) — НЕ уходят в браузер
