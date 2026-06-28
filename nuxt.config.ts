@@ -21,7 +21,7 @@ export default defineNuxtConfig({
     },
   },
 
-  nitro: process.env.VERCEL
+  nitro: process.env.NITRO_PRESET === "vercel"
     ? {
         preset: "vercel",
       }
