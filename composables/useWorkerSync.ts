@@ -171,7 +171,7 @@ export function useWorkerSync(initialEvents: StreamEvent[] = []) {
           category: ev.category || ev.category_name,
           iframe_url: ev.iframe_url ?? ev.iframe,
           is_live: computeIsLive(ev, now),
-        } as StreamEvent
+        }
       })
 
       console.log('[useWorkerSync] fetched:', parsed.length)

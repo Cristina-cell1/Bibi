@@ -136,7 +136,7 @@ const isAdmin = computed(() =>
 
 // ─── SSR prefetch — данные доступны сразу при первом рендере ────────────────
 const { data: prefetchedEvents } = await useAsyncData('streams', async () => {
-  const res = await fetch('https://api.fzpv.st/api/streams-sync')
+  const res = await fetch('/api/streams-sync')
   if (!res.ok) return []
   const json = await res.json()
   const rawEvents = json?.events ?? json?.data ?? []
