@@ -156,7 +156,7 @@ export function useWorkerSync(initialEvents: StreamEvent[] = []) {
 
   async function fetchEvents() {
     try {
-      const res = await fetch('https://api.fzpv.st/api/streams-sync')
+      const res = await fetch('/api/streams-sync')
       if (!res.ok) throw new Error(`HTTP ${res.status}`)
       const json = await res.json()
 
