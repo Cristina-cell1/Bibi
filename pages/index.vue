@@ -221,11 +221,10 @@ const pinnedCards = computed<CardState[]>(() => {
   })
 })
 
-// ─── Open stream overlay ─────────────────────────────────────────────────────
+// ─── Open stream page ────────────────────────────────────────────────────────
 function openStream(event: StreamEvent) {
-  window.dispatchEvent(new CustomEvent('fz:open-stream', { detail: event }))
+  navigateTo(`/stream/${event.id}`)
 }
-
 // ─── Jump to Section ─────────────────────────────────────────────────────────
 const jumpSections = computed(() =>
   sportSections.value
