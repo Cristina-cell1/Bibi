@@ -59,7 +59,6 @@
         </div>
 
         <div class="stream-player__footer">
-          <button class="btn-fullscreen" type="button" @click="requestFullscreen">⛶</button>
           <button class="stream-header__btn stream-header__btn--mobile" type="button" @click="helpOpen = true">
             <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/><path d="M12 17h.01"/></svg>
           </button>
@@ -174,16 +173,6 @@ function onSourceDocClick(e: MouseEvent) {
   if (el && !el.contains(e.target as Node)) sourceMenuOpen.value = false
 }
 
-// ─── Fullscreen ───────────────────────────────────────────────────────────────
-const playerBoxRef = ref<HTMLElement | null>(null)
-async function requestFullscreen() {
-  const box = playerBoxRef.value
-  if (!box) return
-  try {
-    if (box.requestFullscreen) await box.requestFullscreen()
-    else if ((box as any).webkitRequestFullscreen) (box as any).webkitRequestFullscreen()
-  } catch {}
-}
 
 // ─── Help ─────────────────────────────────────────────────────────────────────
 const helpOpen = ref(false)

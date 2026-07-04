@@ -96,7 +96,7 @@
       <div id="page-discord" class="page"></div>
     </main>
 
-    <footer class="footer">
+    <footer class="footer" v-if="!$route.path.startsWith('/stream')">
       <div class="footer__inner">
         <div class="footer__left">
           <img src="/Bibi-logo2.webp" alt="Fightzone" class="footer__logo" />
