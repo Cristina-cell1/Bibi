@@ -110,9 +110,7 @@ const id = computed(() => String(route.params.id ?? ''))
 const { data: streamEvent, pending: loading } = await useAsyncData(
   () => `stream-${id.value}`,
   async () => {
-    const res = await fetch('/api/streams-sync')
-    if (!res.ok) return null
-    const json = await res.json()
+    const json: any = await $fetch('/api/streams-sync')
     const rawEvents: any[] = json?.events ?? json?.data ?? []
     const found = rawEvents.find((ev: any) => String(ev.id) === id.value)
     if (!found) return null
