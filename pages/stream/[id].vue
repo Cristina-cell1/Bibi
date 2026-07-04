@@ -3,8 +3,8 @@
 
     <!-- NOT FOUND -->
     <div v-if="!loading && !streamEvent" class="stream-notfound">
-      <p>Стрим не найден или уже завершился.</p>
-      <button type="button" class="stream-notfound__back" @click="goBack">← На главную</button>
+      <p>Stream not found or ended</p>
+      <button type="button" class="stream-notfound__back" @click="goBack">← Main</button>
     </div>
 
     <!-- STREAM -->
@@ -68,7 +68,7 @@
 
       <!-- Chat (Шаг 3 — навесим следующим) -->
       <div class="stream-chat">
-        <!-- <ChatBox ref="chatBoxRef" :is-admin="isAdmin" /> -->
+        <ChatBox ref="chatBoxRef" :is-admin="isAdmin" />
       </div>
 
     </div>
@@ -97,8 +97,9 @@
 </template>
 
 <script setup lang="ts">
-import { ref, computed, onMounted, onUnmounted } from 'vue'
-import type { StreamEvent } from '~/composables/useWorkerSync'
+import { ref, computed, onMounted, onUnmounted, nextTick } from 'vue'
+
+const { isAdmin } = useAuth()
 
 const route = useRoute()
 const router = useRouter()
@@ -119,7 +120,7 @@ const { data: streamEvent, pending: loading } = await useAsyncData(
       ...found,
       category: found.category || found.category_name,
       iframe_url: found.iframe_url ?? found.iframe,
-    } as StreamEvent
+    }
   },
   { watch: [id] },
 )
@@ -196,9 +197,17 @@ function goBack() {
 }
 
 // ─── Lifecycle ────────────────────────────────────────────────────────────────
-onMounted(() => {
+const chatBoxRef = ref<{ switchRoom: (room: string) => Promise<void> } | null>(null)
+
+onMounted(async () => {
   document.addEventListener('click', onSourceDocClick)
   window.addEventListener('keydown', onEsc)
+
+  // подключаем чат к комнате этого события
+  if (streamEvent.value) {
+    await nextTick()
+    await chatBoxRef.value?.switchRoom(id.value)
+  }
 })
 onUnmounted(() => {
   document.removeEventListener('click', onSourceDocClick)
