@@ -3,7 +3,7 @@
 
     <header class="topbar">
   <div class="container topbar__inner">
-    <div class="topbar__brand" @click="$route.path.startsWith('/auth') ? navigateTo('/') : showPage('main')">
+    <div class="topbar__brand" @click="$route.path !== '/' ? navigateTo('/') : showPage('main')">
       <img src="/bibi-logo.webp" alt="FZ" />
       <span class="brand__name">BIBILIVE</span>
     </div>

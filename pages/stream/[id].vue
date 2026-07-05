@@ -13,7 +13,6 @@
       <!-- Player -->
       <div class="stream-player" ref="playerBoxRef">
         <div class="stream-player__header">
-          <button class="stream-player__back" type="button" @click="goBack">← Back</button>
           <span class="stream-player__title">{{ streamEvent?.title }}</span>
 
           <!-- SOURCE SELECTOR -->

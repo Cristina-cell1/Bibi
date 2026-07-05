@@ -3,7 +3,10 @@
     <!-- ─── Pinned ─────────────────────────────────────────── -->
     <div v-if="pinnedCards.length > 0" class="cards-wrap section">
       <div class="section__header">
-        <h2 class="section__title">⭐ Pinned</h2>
+        <div class="section__title-wrap">
+          <h2 class="section__title">⭐ Pinned</h2>
+        </div>
+        <div class="section__arrows"></div>
       </div>
       <div class="cards--1-wide" id="pinnedCards">
         <EventCard
@@ -17,7 +20,6 @@
         />
       </div>
     </div>
-
 
     <!-- ─── Jump to Section ──────────────────────────────────────── -->
 <div class="jump-nav">
