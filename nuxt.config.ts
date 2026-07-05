@@ -17,6 +17,7 @@ export default defineNuxtConfig({
         { rel: "stylesheet", href: "/styles.css" },
         { rel: "stylesheet", href: "/paywall.css" },
         { rel: "stylesheet", href: "/cards.css" },
+        { rel: "stylesheet", href: "/stream.css" },
       ],
     },
   },

@@ -241,7 +241,10 @@ function scrollTo(id: string) {
   window.scrollTo({ top: y, behavior: 'smooth' })
 }
 
-const expandedSections = ref(new Set<string>())
+const expandedSections = ref(new Set<string>([
+  'liveCards',
+  ...SPORT_SECTION_DEFS.map(s => s.id),
+]))
 
 function toggleExpand(id: string) {
   if (expandedSections.value.has(id)) {

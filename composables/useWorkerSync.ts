@@ -53,8 +53,9 @@ export type SectionId =
   | 'americanFootballCards'
   | 'baseballCards'
   | 'rugbyCards'
+  | 'tennisCards'
   | 'streams247Cards'
-
+  | 'otherCards'
 export type SectionsMap = Record<SectionId, CardState[]>
 
 function emptySections(): SectionsMap {
@@ -70,10 +71,11 @@ function emptySections(): SectionsMap {
     americanFootballCards: [],
     baseballCards: [],
     rugbyCards: [],
+    tennisCards: [],
     streams247Cards: [],
+    otherCards: [],
   }
 }
-
 // ─── Countdown formatter ──────────────────────────────────────────────────────
 
 export function formatDiff(ms: number): string {
@@ -108,6 +110,7 @@ const CATEGORY_SECTION_MAP: Array<[RegExp, SectionId]> = [
   [/american.?foot|nfl/i,             'americanFootballCards'],
   [/baseball|mlb/i,                   'baseballCards'],
   [/rugby|nrl/i,                      'rugbyCards'],
+  [/tennis|atp|wta/i,                 'tennisCards'],
   [/football|soccer/i,                'footballCards'],
 ]
 
@@ -117,7 +120,7 @@ export function sectionForEvent(event: StreamEvent): SectionId {
   for (const [re, id] of CATEGORY_SECTION_MAP) {
     if (re.test(haystack)) return id
   }
-  return 'footballCards'
+  return 'otherCards'
 }
 
 // ─── Viewer count jitter ──────────────────────────────────────────────────────
