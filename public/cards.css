@@ -528,13 +528,13 @@
 }
 
 .card__section-label {
-  font-size: 10.5px;
+  font-size: 10px;
   color: rgba(255, 255, 255, 0.829);
   font-family: 'Mozilla Text', sans-serif;
   text-transform: uppercase;
-  letter-spacing: .02em;
+  letter-spacing: .0em;
   flex: 1;
-  padding-top: 3px;
+  padding-top: 0px;
 }
 
 /* ===== VIEW ALL / EXPANDED GRID ===== */
