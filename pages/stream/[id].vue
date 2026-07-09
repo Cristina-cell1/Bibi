@@ -95,9 +95,10 @@
 </template>
 
 <script setup lang="ts">
-import { ref, computed, onMounted, onUnmounted, nextTick } from 'vue'
+import { ref, computed, onMounted, onUnmounted, nextTick, watch } from 'vue'
 
 const { isAdmin } = useAuth()
+const { trackSelf, untrackSelf } = usePresence()
 
 const route = useRoute()
 const router = useRouter()
@@ -194,12 +195,21 @@ onMounted(async () => {
     await nextTick()
     await chatBoxRef.value?.switchRoom(id.value)
   }
+
+  // трекаем текущего зрителя как реального зрителя этого стрима
+  if (streamEvent.value) trackSelf(id.value)
 })
 onUnmounted(() => {
   document.removeEventListener('click', onSourceDocClick)
   window.removeEventListener('keydown', onEsc)
+  untrackSelf()
 })
 function onEsc(e: KeyboardEvent) {
   if (e.key === 'Escape') goBack()
 }
+
+// переход на другой стрим без полной перезагрузки (SPA) — перетрекиваем self
+watch(id, (newId) => {
+  if (streamEvent.value) trackSelf(newId)
+})
 </script>

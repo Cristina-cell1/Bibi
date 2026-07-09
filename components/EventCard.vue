@@ -43,11 +43,6 @@
         <div class="card__timer" :data-live-dyn="card.isLive ? '1' : ''">
           <template v-if="card.isLive">
             <span class="liveBadge">LIVE</span>
-            <template v-if="isAdmin">
-              <button type="button" class="live-arrow live-up" @click.stop="$emit('adjust-viewers', 2)">&#9650;</button>
-              <span class="live-num">{{ card.viewers.toLocaleString() }}</span>
-              <button type="button" class="live-arrow live-down" @click.stop="$emit('adjust-viewers', -2)">&#9660;</button>
-            </template>
           </template>
           <template v-else>
             {{ card.timerText }}
@@ -92,7 +87,6 @@ const props = defineProps<{
 
 const emit = defineEmits<{
   click: []
-  'adjust-viewers': [delta: number]
 }>()
 
 // --- Pin logic ---

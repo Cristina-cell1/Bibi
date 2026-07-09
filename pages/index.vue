@@ -8,7 +8,7 @@
         </div>
         <div class="section__arrows"></div>
       </div>
-      <div class="cards--1-wide" id="pinnedCards">
+      <TransitionGroup name="pin-fade" appear tag="div" class="cards--1-wide" id="pinnedCards">
         <EventCard
           v-for="card in pinnedCards"
           :key="card.event.id"
@@ -16,9 +16,8 @@
           :is-admin="isAdmin"
           :is-pinned="true"
           @click="openStream(card.event)"
-          @adjust-viewers="(delta: number) => adjustViewerCount(String(card.event.id), delta)"
         />
-      </div>
+      </TransitionGroup>
     </div>
 
     <!-- ─── Jump to Section ──────────────────────────────────────── -->
@@ -70,7 +69,7 @@
       :card="card"
       :is-admin="isAdmin"
       @click="openStream(card.event)"
-      @adjust-viewers="(delta: number) => adjustViewerCount(String(card.event.id), delta)"
+      
     />
   </div>
   <div v-else class="live-empty">
@@ -108,7 +107,7 @@
           :card="card"
           :is-admin="isAdmin"
           @click="openStream(card.event)"
-          @adjust-viewers="(delta: number) => adjustViewerCount(String(card.event.id), delta)"
+          
         />
       </div>
     </div>
@@ -153,7 +152,7 @@ const { data: prefetchedEvents } = await useAsyncData('streams', async () => {
 // TEMP DEBUG
 console.log('[index] prefetched events:', prefetchedEvents.value?.length ?? 'null')
 // ─── Worker sync ────────────────────────────────────────────────────────────
-const { sections, adjustViewerCount } = useWorkerSync(prefetchedEvents.value ?? [])
+const { sections } = useWorkerSync(prefetchedEvents.value ?? [])
 const { refresh: refreshScroll } = useCardScroll()
 
 // ─── Live section ───────────────────────────────────────────────────────────

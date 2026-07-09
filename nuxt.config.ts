@@ -5,7 +5,7 @@ export default defineNuxtConfig({
     head: {
       charset: "utf-8",
       viewport: "width=device-width, initial-scale=1",
-      title: "Free Sport Streaming",
+      title: "bibi.st",
       link: [
         { rel: "icon", type: "image/png", sizes: "32x32", href: "/favicon.webp?v=4" },
         { rel: "preconnect", href: "https://fonts.googleapis.com" },
